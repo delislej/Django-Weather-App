@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md bg-primary">
+        <div class="container-fluid"><a class="navbar-brand" data-bs-hover-animate="bounce" href="https://joseph.delisle.io/">Joseph.Delisle.io</a><button data-toggle="collapse" class="navbar-toggler bounce animated" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation" style="filter: contrast(101%) hue-rotate(53deg) invert(0%) saturate(100%);font-size: 16px;"><a class="nav-link active" style="filter: blur(0px);color: #000000;" href="https://joseph.delisle.io/github.html">Github</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="https://joseph.delisle.io/game.html" style="color: #000000;">Aliens</a></li>
+                    <li class="nav-item border rounded" role="presentation" data-bs-hover-animate="bounce" style="color: rgb(0,0,0);background-color: #106488;filter: hue-rotate(53deg);"><a class="nav-link" href="#" style="color: #000000;">Weather</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="color: #000000;">Taskminder</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="color: #000000;">Contact</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+
+	</ul>
+    <section class="hero is-primary">
+        <div class="hero-body" style="background-color: #49628a">
+            <div class="container">
+                <h1 class="title">
+
+
+
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-2 is-16">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                            {{ form.name }}
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button is-info">
+                                    Add city
+                                </button>
+                            </div>
+                        </div>
+                        {% if message %}
+                        <div class="notification {{ message_class }}">{{ message }}</div>
+                        {% endif %}
+                    </form>
+
+
+</div>
+
+        </div>
+                    </div>
+
+    </section>
+
+
+
+
+                {% for city_weather in weather_data %}
+
+
+
+
+                <div class="box" style="text-align: center; font-size: 30px; margin: 20px;">
+                    <span class="title">{{ city_weather.city }} <a href="{% url 'delete_city' city_weather.city %}">
+                                    <button class="delete is-medium"></button></a></span>
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <!-- Control the column width, and how they should appear on different devices -->
+    <!-- Or let Bootstrap automatically handle the layout -->
+    <br>
+
+
+      <div class="item" style="background-color:yellow;"><article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.d1icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        {{ city_weather.d1 }}
+                                        <br>
+                                        <span class="subtitle">{{ city_weather.d1temperature | floatformat }} °F</span>
+                                        <br> {{ city_weather.d1description }}
+                                    </p>
+                                </div>
+                            </div>
+
+                        </article></div>
+      <div class="item" style="background-color:orange;"><article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.d2icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        {{ city_weather.d2 }}
+                                        <br>
+                                        <span class="subtitle">{{ city_weather.d2temperature | floatformat }} °F</span>
+                                        <br> {{ city_weather.d2description }}
+                                    </p>
+                                </div>
+                            </div>
+
+                        </article></div>
+      <div class="item" style="background-color:yellow;">
+
+          <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.d3icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        {{ city_weather.d3 }}
+                                        <br>
+                                        <span class="subtitle">{{ city_weather.d3temperature | floatformat }} °F</span>
+                                        <br> {{ city_weather.d3description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+      </div>
+      <div class="item" style="background-color:orange;"><article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.d4icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        {{ city_weather.d4 }}
+                                        <br>
+                                        <span class="subtitle">{{ city_weather.d4temperature | floatformat }} °F</span>
+                                        <br> {{ city_weather.d4description }}
+                                    </p>
+                                </div>
+                            </div>
+
+                        </article></div>
+      <div class="item" style="background-color:yellow;"><article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.d5icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        {{ city_weather.d5 }}
+                                        <br>
+                                        <span class="subtitle">{{ city_weather.d5temperature | floatformat }} °F</span>
+                                        <br> {{ city_weather.d5description }}
+                                    </p>
+                                </div>
+                            </div>
+
+                        </article></div>
+        <p></p>
+
+  </div>
+
+</div>
+
+
+
+
+
+                    {%endfor%}
+
+
+
+
+
+
+
+
+</footer>
+    <script src="{%  static 'assets/js/jquery.min.js'%}"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{%  static 'assets/js/bs-animation.js' %}"></script>
+</body>
+
+</html>

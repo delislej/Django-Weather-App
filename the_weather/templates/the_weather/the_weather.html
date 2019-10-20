@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%  static 'assets/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css'%}">
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/bootstrap/js/bootstrap.min.js'%}"></script>
+        <script src="{%  static 'assets/js/bs-animation.js'%}"></script>
+        <script src="{%  static 'assets/js/chart.min.js'%}"></script>
+</head>
+
+<body style="background-color: rgb(73,98,138);">{% load static %}
+    <nav class="navbar navbar-light navbar-expand-md bg-primary">
+        <div class="container-fluid"><a class="navbar-brand" data-bs-hover-animate="bounce" href="https://joseph.delisle.io/">Joseph.Delisle.io</a><button data-toggle="collapse" class="navbar-toggler bounce animated" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation" style="filter: contrast(101%) hue-rotate(53deg) invert(0%) saturate(100%);font-size: 16px;"><a class="nav-link active" style="filter: blur(0px);color: #000000;" href="https://github.com/delislej">Github</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="https://joseph.delisle.io/game.html" style="color: #000000;">Aliens</a></li>
+                    <li class="nav-item border rounded" role="presentation" data-bs-hover-animate="bounce" style="color: rgb(0,0,0);background-color: #106488;filter: hue-rotate(53deg);"><a class="nav-link" href="#" style="color: #000000;">Weather</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="http://task.joseph.delisle.io" style="color: #000000;">Taskminder</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="https://joseph.delisle.io/about.html" style="color: #000000;">Contact</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <main>
+        <h1 class="text-center">Whats the weather like?</h1>
+    </main>
+    <p class="text-center"> A simple weather app built using the openweathermap API, django, and python. an example of a full stack project. python for back end, HTML/CSS/bootstrap for front end, and Mysql for the database.</p>
+    <form class="d-flex justify-content-xl-center" style="margin: 0px;"
+        method="POST"><div>{%csrf_token%}</div><div class="field has-addons">
+        <div class="control is-expanded">
+            {{ form.name }}
+        </div>
+        <div class="control"><button class="btn btn-primary" type="submit">Add City</button>                        {% if message %}
+                        <div class="notification {{ message_class }}">{{ message }}</div>
+
+                        {% endif %}
+        </div>
+    </div>
+    </form>
+
+{% for city_weather in weather_data %}
+
+    <div
+        class="container">
+        <div class="row">
+            <div class="col"><div><div class="box" style="text-align: center; font-size: 30px; margin: 20px;">
+                    <span class="title">{{ city_weather.city }} <a href="{% url 'delete_city' city_weather.city %}">
+                                    <button class="delete is-medium"></button></a></span></div></div>
+            </div>
+
+    <canvas id="{{ city_weather.city }}" width="400" height="200"></canvas>
+<script>
+var ctx = document.getElementById('{{ city_weather.city }}').getContext('2d');
+
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['{{ city_weather.d1 }}', '{{ city_weather.d2 }}', '{{ city_weather.d3 }}', '{{ city_weather.d4 }}', '{{ city_weather.d5 }}'],
+        datasets: [{
+            label: 'Temp in F',
+            pointBorderWidth: 8,
+          pointHoverRadius: 8,
+          pointHoverBorderWidth: 1,
+          pointRadius: 3,
+
+            borderColor: 'rgba(80, 40, 100, 1)',
+          borderWidth: 10,
+            data: [{{ city_weather.d1temperature | floatformat }}, {{ city_weather.d2temperature | floatformat }}, {{ city_weather.d3temperature | floatformat }}, {{ city_weather.d4temperature | floatformat }}, {{ city_weather.d4temperature | floatformat }}],
+
+
+
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+
+                ticks: {
+                    fontColor: "#000000",
+                    beginAtZero: false
+                }
+            }],
+
+            xAxes: [{
+
+                ticks: {
+                    fontColor: "#000000",
+
+                }
+            }]
+        },
+
+        legend: {
+             labels: {
+                  fontColor: 'orange'
+                 }
+              }
+
+
+    }
+});
+</script>
+
+{%endfor%}
+
+</body>
+
+</html>
